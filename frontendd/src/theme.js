@@ -31,7 +31,7 @@ export const colorTokens = {
 
 export const themeSetting=(mode)=>{
   return {
-    pallete:{
+    palette:{
       mode:mode,
       ...(mode==="dark")?{
         //pallete values for dark theme

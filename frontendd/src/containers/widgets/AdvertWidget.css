@@ -1,0 +1,8 @@
+.advertWidgett{
+    position:fixed;
+}
+@media only screen and (max-width: 600px){
+    .advertWidgett{
+        position: relative;
+    }
+}

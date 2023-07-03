@@ -27,8 +27,18 @@ exports.createPost=async(req,res)=>{
 
 exports.getFeedPosts=async(req,res)=>{
     try {
-        const post=await Post.find();
-        res.status(200).json(post);
+        const posts = await Post.find();
+
+        for (index = 0; index < posts.length; index++) {
+            
+            const id = posts[index].userId;  
+            const user=await User.findById(id);
+            posts[index].firstName = user.firstName;
+            posts[index].lastName = user.lastName;
+            posts[index].location = user.location;
+            posts[index].userPicturePath = user.picturePath;
+        }
+        res.status(200).json(posts);
     } catch (error) {
         res.status(404).json({error:error.msg})
     }
@@ -37,8 +47,17 @@ exports.getFeedPosts=async(req,res)=>{
 exports.getUserPosts=async(req,res)=>{
     try {
         const {userId}=req.params;
-        const post=await Post.find({userId});
-        res.status(200).json(post);
+        const posts=await Post.find({userId});
+        for (index = 0; index < posts.length; index++) {
+            
+            const id = posts[index].userId;  
+            const user=await User.findById(id);
+            posts[index].firstName = user.firstName;
+            posts[index].lastName = user.lastName;
+            posts[index].location = user.location;
+            posts[index].userPicturePath = user.picturePath;
+        }
+        res.status(200).json(posts);
     } catch (error) {
         res.status(409).json({error:error.msg})
     }
@@ -59,8 +78,11 @@ exports.likePost=async(req,res)=>{
         const updatedPost=await Post.findByIdAndUpdate(
             id,
             {likes:post.likes},
+            // {firstName},
             {new:true}
             )
+            
+            console.log(updatedPost);
         res.status(200).json(updatedPost);
     } catch (error) {
         res.status(409).json({error:error.msg})

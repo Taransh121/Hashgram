@@ -10,9 +10,9 @@ import FriendListWidget from '../widgets/FriendListWidget';
 
 export const Homepage = () => {
   const isNonMobileScreen=useMediaQuery("(min-width:1000px)");
-  const { _id,picturePath}=useSelector((state)=>state.user);
+  const {firstName,_id,picturePath}=useSelector((state)=>state.user);
   return (
-    <Box sx={{backgroundColor:"#f6f6f6"}}>
+    <Box >
       <Navbar/>
       <Box width="100%" padding="2rem 6%" display={isNonMobileScreen ? "flex" : "block"} gap="0.5rem" justifyContent="space-between">
         <Box flexBasis={isNonMobileScreen ? "26%" :undefined}>
@@ -22,7 +22,7 @@ export const Homepage = () => {
         flexBasis={isNonMobileScreen ? "42%" :undefined} mt={isNonMobileScreen?undefined:"2rem"}
         >
           <MyPostWidget picturePath={picturePath} /> <br/>
-          <PostsWidget userId={_id} />
+          <PostsWidget userId={_id} firstName={firstName}  />
         </Box>
         {isNonMobileScreen && <Box flexBasis="26%">
         <AdvertWidget/>

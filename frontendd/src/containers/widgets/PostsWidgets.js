@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux/";
 import { useDispatch } from "react-redux/";
 import { setPosts } from "../../state/state";
 import PostWidget from "./PostWidget";
+import React, { useEffect } from 'react';
 
 const PostsWidget = ({ userId, isProfile = false }) => {
     const dispatch = useDispatch();
@@ -27,27 +27,29 @@ const PostsWidget = ({ userId, isProfile = false }) => {
             }
         );
         const data = await response.json();
+
         dispatch(setPosts({ posts: data }));
     };
+
     useEffect(() => {
         if (isProfile) {
             getUserPosts();
         } else {
             getPosts();
         }
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
     return (
         <>
             {
-            
+
                 Array.from(posts).map(
-                    ({ _id, userId:postUserId, firstName, lastName, description, location, picturePath, userPicturePath, likes, comments}) => (
+                    ({ _id, userId: postUserId, firstName, lastName, description, location, picturePath, userPicturePath, likes, comments }) => (
                         <>
-                        <PostWidget
-                            key={_id} postId={_id} postUserId={postUserId} name={`${firstName} ${lastName}`} description={description} location={location} picturePath={picturePath} userPicturePath={userPicturePath} likes={likes} comments={comments}
-                            /> 
-                            
-                        <br/>
+                            <PostWidget
+                                key={_id} postId={_id} postUserId={postUserId} name={`${firstName} ${lastName}`} description={description} location={location} picturePath={picturePath} userPicturePath={userPicturePath} likes={likes} comments={comments}
+                            />
+                            <br />
                         </>
                     ))
             }

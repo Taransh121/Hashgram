@@ -1,0 +1,8 @@
+.friendListWidgett{
+    position:fixed;
+}
+@media only screen and (max-width: 600px){
+    .friendListWidgett{
+        position: relative;
+    }
+}

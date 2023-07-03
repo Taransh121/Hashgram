@@ -1,19 +1,22 @@
 import {ManageAccountsOutlined,EditOutlined,LocationOnOutlined,WorkOutlineOutlined,} from "@mui/icons-material";
-import { Box, Typography, Divider} from "@mui/material";
+import { Box, Typography, Divider,useTheme} from "@mui/material";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserImage from '../../components/UserImage';
 import WidgetWrapper from "../../components/WidgetWrapper";
 import FlexBetween from "../../components/FlexBetween";
+import "./UserWidget.css";
   
   const UserWidget = ({ userId, picturePath }) => {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
     const token = useSelector((state) => state.token);
-    const dark = "black";
-    const medium = "grey";
-    const main = "black";
+
+    const { palette } = useTheme();
+    // const dark = palette.neutral.dark;
+  const medium = palette.neutral.medium;
+  const main = palette.neutral.main;
   
     const getUser = async () => {
       const response = await fetch(`http://localhost:3001/users/${userId}`, {
@@ -35,7 +38,7 @@ import FlexBetween from "../../components/FlexBetween";
     const {firstName,lastName,location,occupation,viewedProfile,impressions,friends} = user;
   
     return (
-      <WidgetWrapper sx={{backgroundColor:"white"}}>
+      <WidgetWrapper>
         {/* FIRST ROW */}
         <FlexBetween
           gap="0.5rem"
@@ -47,11 +50,11 @@ import FlexBetween from "../../components/FlexBetween";
             <Box>
               <Typography
                 variant="h6"
-                color={dark}
-                fontWeight="600"
+                color={palette.neutral.dark}
+                fontWeight="550"
                 sx={{
                   "&:hover": {
-                    color: "#0f61b1",
+                    color: palette.primary.main,
                     cursor: "pointer",
                   },
                 }}
@@ -83,13 +86,13 @@ import FlexBetween from "../../components/FlexBetween";
         {/* THIRD ROW */}
         <Box p="1rem 0">
           <FlexBetween mb="0.5rem">
-            <Typography color={medium}>Who's viewed your profile</Typography>
+            <Typography color={palette.neutral.dark} >Who's viewed your profile</Typography>
             <Typography color={main} fontWeight="500">
               {viewedProfile}
             </Typography>
           </FlexBetween>
           <FlexBetween>
-            <Typography color={medium}>Impressions of your post</Typography>
+            <Typography color={palette.neutral.dark}>Impressions of your post</Typography>
             <Typography color={main} fontWeight="500">
               {impressions}
             </Typography>
@@ -100,7 +103,7 @@ import FlexBetween from "../../components/FlexBetween";
   
         {/* FOURTH ROW */}
         <Box p="1rem 0">
-          <Typography fontSize="1rem" color={main} fontWeight="600" mb="1rem">
+          <Typography fontSize="1rem" color={palette.neutral.dark} fontWeight="500" mb="1rem">
             Social Profiles
           </Typography>
   
@@ -108,7 +111,7 @@ import FlexBetween from "../../components/FlexBetween";
             <FlexBetween gap="1rem">
               <img src="../assets/twitter.png" alt="twitter" />
               <Box>
-                <Typography color={main} fontWeight="550">
+                <Typography color={palette.neutral.dark} fontWeight="500">
                   Twitter
                 </Typography>
                 <Typography color={medium}>Social Network</Typography>
@@ -121,7 +124,7 @@ import FlexBetween from "../../components/FlexBetween";
             <FlexBetween gap="1rem">
               <img src="../assets/linkedin.png" alt="linkedin" />
               <Box>
-                <Typography color={main} fontWeight="550">
+                <Typography color={palette.neutral.dark} fontWeight="500">
                   Linkedin
                 </Typography>
                 <Typography color={medium}>Network Platform</Typography>
