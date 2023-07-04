@@ -15,7 +15,7 @@ import { themeSetting } from "./theme";
 function App() {
   const mode=useSelector((state)=>state.mode); 
   const theme=useMemo(()=>createTheme(themeSetting(mode)),[mode]);
-  console.log(mode);
+  // console.log(mode);
   const isAuth = Boolean(useSelector((state) => state.token));
 
   return (
