@@ -21,7 +21,6 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
 
   const isFriend = Array.from(friends).find((friend) => (friend._id === friendId));
   const checkId=(_id===friendId);
-  // console.log(isFriend + friendId);
 
   const patchFriend = async () => {
     if(_id===friendId){
